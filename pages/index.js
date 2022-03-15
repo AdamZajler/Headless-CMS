@@ -1,10 +1,14 @@
 import Head from "next/head";
 import fetcher from "../../../headless-wordpress/lib/fetcher";
-import { GET_MAIN_MENU } from "../../../headless-wordpress/lib/wordpress/menu";
-import { GET_PAGE_HEAD_DATA } from "../../../headless-wordpress/lib/wordpress/head";
+import { GET_MAIN_MENU } from "../lib/wordpress/menu";
 import { MainMenu } from "../components/wordpress/mainMenu";
+import { useRouter } from "next/router";
+import { GET_PAGE_HEAD_DATA } from "../lib/wordpress/head";
 
-export default function Home({ mainMenu, head }) {
+export default function Home({ mainMenu, head, context }) {
+	const router = useRouter();
+	console.log("context", context);
+	console.log(head);
 	return (
 		<div>
 			<Head>
@@ -24,13 +28,20 @@ export default function Home({ mainMenu, head }) {
 	);
 }
 
-export async function getStaticProps() {
-	const mainMenuResponse = await fetcher(GET_MAIN_MENU);
-	const mainMenu = mainMenuResponse.menu;
+export async function getStaticProps(context) {
+	let menuID;
+	let language = context.locale;
+	language == "pl" ? (menuID = "119") : (menuID = "159");
 	const variables = {
+		// For head
 		pageID: "2",
+		pageLang: language.toUpperCase(),
+		// For mainMenu
+		menuID: menuID,
 	};
+	const mainMenuResponse = await fetcher(GET_MAIN_MENU, { variables });
+	const mainMenu = mainMenuResponse.menu;
 	const headResponse = await fetcher(GET_PAGE_HEAD_DATA, { variables });
-	const head = headResponse.page;
-	return { props: { mainMenu, head } };
+	const head = headResponse.page.translation;
+	return { props: { mainMenu, head, context } };
 }

@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export function MainMenu({ menu }) {
+	const router = useRouter();
+	console.log("router", router);
 	return (
 		<nav>
 			<ul className={`${menu.slug}`}>
@@ -17,6 +20,20 @@ export function MainMenu({ menu }) {
 					);
 				})}
 			</ul>
+			<button
+				onClick={() => {
+					router.replace(`${router.asPath}`, `${router.asPath}`, { locale: "pl" });
+				}}
+			>
+				na pl!
+			</button>
+			<button
+				onClick={() => {
+					router.replace(`${router.asPath}`, `${router.asPath}`, { locale: "en" });
+				}}
+			>
+				na en!
+			</button>
 		</nav>
 	);
 }
