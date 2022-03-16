@@ -7,8 +7,6 @@ import { GET_PAGE_HEAD_DATA } from "../../lib/wordpress/head";
 
 export default function AboutUs({ mainMenu, head, context }) {
 	const router = useRouter();
-
-	console.log("/en/o-nas", head.acf_head);
 	return (
 		<div>
 			<Head>
