@@ -1,16 +1,14 @@
+const withTranslateRoutes = require("next-translate-routes/plugin");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
 };
 
-module.exports = {
+module.exports = withTranslateRoutes({
 	i18n: {
-		// These are all the locales you want to support in
-		// your application
 		locales: ["en", "pl"],
-		// This is the default locale you want to be used when visiting
-		// a non-locale prefixed path e.g. `/hello`
-		defaultLocale: "en",
+		defaultLocale: "pl",
 	},
 	nextConfig,
-};
+});

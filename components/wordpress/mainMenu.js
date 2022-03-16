@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 export function MainMenu({ menu }) {
 	const router = useRouter();
-	console.log("router", router);
 	return (
 		<nav>
 			<ul className={`${menu.slug}`}>
@@ -23,6 +22,7 @@ export function MainMenu({ menu }) {
 			<button
 				onClick={() => {
 					router.replace(`${router.asPath}`, `${router.asPath}`, { locale: "pl" });
+					// router.push(router.asPath, router.asPath, { locale: "pl" });
 				}}
 			>
 				na pl!
@@ -30,6 +30,7 @@ export function MainMenu({ menu }) {
 			<button
 				onClick={() => {
 					router.replace(`${router.asPath}`, `${router.asPath}`, { locale: "en" });
+					// router.push(router.asPath, router.asPath, { locale: "en" });
 				}}
 			>
 				na en!
