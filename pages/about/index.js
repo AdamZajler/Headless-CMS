@@ -1,23 +1,18 @@
 import Head from "next/head";
 import fetcher from "../../../../headless-wordpress/lib/fetcher";
+import getMeta from "../../lib/getMeta";
+import parse from "html-react-parser";
 import { GET_MAIN_MENU } from "../../lib/wordpress/menu";
 import { MainMenu } from "../../components/wordpress/mainMenu";
 import { useRouter } from "next/router";
-import { GET_PAGE_HEAD_DATA } from "../../lib/wordpress/head";
 
-export default function AboutUs({ mainMenu, head, context }) {
+export default function AboutUs({ mainMenu, meta }) {
 	const router = useRouter();
+	// Get meta data from RankMath
+	const metaData = parse(meta);
 	return (
 		<div>
-			<Head>
-				<title>{head.acf_head.metaTitle ? head.acf_head.metaTitle : head.title}</title>
-				<meta
-					name="description"
-					content={`${head.acf_head.metaDescription ? head.acf_head.metaDescription : ""}`}
-				/>
-				<meta name="keywords" content={`${head.acf_head.metaKeywords ? head.acf_head.metaKeywords : ""}`} />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+			<Head>{metaData}</Head>
 
 			<MainMenu menu={mainMenu} />
 
@@ -41,7 +36,7 @@ export async function getStaticProps(context) {
 	};
 	const mainMenuResponse = await fetcher(GET_MAIN_MENU, { variables });
 	const mainMenu = mainMenuResponse.menu;
-	const headResponse = await fetcher(GET_PAGE_HEAD_DATA, { variables });
-	const head = headResponse.page.translation;
-	return { props: { mainMenu, head, context } };
+	const metaResponse = await getMeta("about-us");
+	const meta = metaResponse ? metaResponse : "RankMath response empty";
+	return { props: { mainMenu, meta } };
 }
