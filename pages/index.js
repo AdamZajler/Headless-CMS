@@ -1,5 +1,5 @@
 import Head from "next/head";
-import fetcher from "../../../headless-wordpress/lib/fetcher";
+import fetcher from "../lib/fetcher";
 import parse from "html-react-parser";
 import getMeta from "../lib/getMeta";
 import { GET_SINGLE_MENU } from "../lib/wordpress/menu";
