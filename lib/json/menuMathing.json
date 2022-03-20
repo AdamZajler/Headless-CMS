@@ -1,0 +1,11 @@
+{
+    "en": {
+        "primary" : "main-menu",
+        "footer-1": "footer-menu-1",
+        "mobile": "testowe-menu"
+    },
+    "pl": {
+        "primary" : "menu-glowne"
+    }
+    
+}

@@ -2,21 +2,26 @@ import Head from "next/head";
 import fetcher from "../../../headless-wordpress/lib/fetcher";
 import parse from "html-react-parser";
 import getMeta from "../lib/getMeta";
-import { GET_MAIN_MENU } from "../lib/wordpress/menu";
+import { GET_SINGLE_MENU } from "../lib/wordpress/menu";
 import { GET_PAGE_DATA } from "../lib/wordpress/page";
 import { MainMenu } from "../components/wordpress/mainMenu";
 import { getPageSlug } from "../lib/getPageSlug";
+import { getMenu } from "../lib/getMenu";
 
-export default function Home({ mainMenu, meta, page, pageSlug }) {
-	// Parse sting data to HTML
+export default function Home({ meta, page, menus }) {
+	// Filter for primary menu
+	const mainMenu = menus.filter((single) => {
+		if(single.type == "primary") {return single.menu}
+	})[0].menu.menus.edges[0].node;
+
+	// Parse string meta data to HTML
 	const metaData = parse(meta);
 
-	console.log("slug strony w WP zaciągniety z jsona: ", pageSlug);
 	return (
 		<div>
 			<Head>{metaData}</Head>
 
-			<MainMenu menu={mainMenu} />
+			<MainMenu mainMenu={mainMenu} />
 
 			<main>
 				<h1>{page.title}</h1>
@@ -28,21 +33,27 @@ export default function Home({ mainMenu, meta, page, pageSlug }) {
 export async function getStaticProps(context) {
 	// Get translated page slug based on page DATABASE ID (EN)
 	let pageSlug = getPageSlug(3935, context.locale)
-	
-	let menuID;
-	let language = context.locale;
-	language == "pl" ? (menuID = "119") : (menuID = "159");
-	// const nameOfPage =
+
 	const variables = {
-		// For mainMenu
-		menuID: menuID,
-		pageName: language == "pl" ? "strona-glowna" : "home-page",
+		// For pageDataResponse
+		pageName: pageSlug,
 	};
-	const mainMenuResponse = await fetcher(GET_MAIN_MENU, { variables });
-	const mainMenu = mainMenuResponse.menu;
-	const metaResponse = await getMeta("home-page");
+	
+	// Get all menus from specific language
+	let menus = getMenu(context.locale, ["primary"])
+	let menusResponse = [];
+	for (let single of menus){
+		let variables = {
+			singleMenuLang: single.id
+		}
+		let singleMenu = await fetcher(GET_SINGLE_MENU, { variables });
+		menusResponse.push({type: single.type, id: single.id, menu: singleMenu});
+	}
+	menus = menusResponse;
+
+	const metaResponse = await getMeta(pageSlug);
 	const meta = metaResponse ? metaResponse : "RankMath response empty";
 	const pageDataResponse = await fetcher(GET_PAGE_DATA, { variables });
 	const page = pageDataResponse.page;
-	return { props: { mainMenu, meta, page, pageSlug } };
+	return { props: { meta, page, menus } };
 }

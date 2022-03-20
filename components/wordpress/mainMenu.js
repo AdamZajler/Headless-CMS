@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export function MainMenu({ menu }) {
+export function MainMenu({ mainMenu }) {
 	const router = useRouter();
 	return (
 		<nav>
-			<ul className={`${menu.slug}`}>
-				{menu.menuItems.edges.map((menuItem) => {
-					const { id, cssClasses, label, path, title } = menuItem.node;
+			<ul className={`${mainMenu.slug}`}>
+				{mainMenu.menuItems.nodes.map((menuItem) => {
+					const { id, cssClasses, label, path, title } = menuItem;
 					return (
 						<li key={id} id={`${id}`}>
 							<Link href={`${path ? path : "/"}`}>
