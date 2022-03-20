@@ -6,9 +6,19 @@ const nextConfig = {
 };
 
 module.exports = withTranslateRoutes({
+	nextConfig,
 	i18n: {
 		locales: ["en", "pl"],
 		defaultLocale: "pl",
 	},
-	nextConfig,
+	async redirects() {
+    return [
+      {
+		// Redirect from /en/home-page to /en
+        source: '/home-page',
+        destination: '/',
+        permanent: true,
+      },
+    ]
+  },
 });
