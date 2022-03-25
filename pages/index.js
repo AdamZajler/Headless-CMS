@@ -7,11 +7,15 @@ import { GET_PAGE_DATA } from "../lib/wordpress/page";
 import { MainMenu } from "../components/wordpress/mainMenu";
 import { getPageSlug } from "../lib/getPageSlug";
 import { getMenu } from "../lib/getMenu";
+import { Container } from "../components/structure/container";
+import { ContainerFull } from "../components/structure/ContainerFull";
 
 export default function Home({ meta, page, menus }) {
 	// Filter for primary menu
 	const mainMenu = menus.filter((single) => {
-		if(single.type == "primary") {return single.menu}
+		if (single.type == "primary") {
+			return single.menu;
+		}
 	})[0].menu.menus.edges[0].node;
 
 	// Parse string meta data to HTML
@@ -23,8 +27,14 @@ export default function Home({ meta, page, menus }) {
 
 			<MainMenu mainMenu={mainMenu} />
 
+			<Container>
+				<h2 className="text-white">COŚ</h2>
+			</Container>
+
 			<main>
-				<h1>{page.title}</h1>
+				<ContainerFull>
+					<h1 className="font-bold text-primary">{page.title}</h1>
+				</ContainerFull>
 			</main>
 		</div>
 	);
@@ -32,22 +42,22 @@ export default function Home({ meta, page, menus }) {
 
 export async function getStaticProps(context) {
 	// Get translated page slug based on page DATABASE ID (EN)
-	let pageSlug = getPageSlug(3935, context.locale)
+	let pageSlug = getPageSlug(3935, context.locale);
 
 	const variables = {
 		// For pageDataResponse
 		pageName: pageSlug,
 	};
-	
+
 	// Get all menus from specific language
-	let menus = getMenu(context.locale, ["primary"])
+	let menus = getMenu(context.locale, ["primary"]);
 	let menusResponse = [];
-	for (let single of menus){
+	for (let single of menus) {
 		let variables = {
-			singleMenuLang: single.id
-		}
+			singleMenuLang: single.id,
+		};
 		let singleMenu = await fetcher(GET_SINGLE_MENU, { variables });
-		menusResponse.push({type: single.type, id: single.id, menu: singleMenu});
+		menusResponse.push({ type: single.type, id: single.id, menu: singleMenu });
 	}
 	menus = menusResponse;
 
