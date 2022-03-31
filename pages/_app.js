@@ -5,7 +5,7 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }) {
 	return (
 		<>
-			<NextNProgress height={4} color={"#0C6DAA"} />
+			<NextNProgress height={3} color={"#0C6DAA"} />
 			<Component {...pageProps} />;
 		</>
 	);

@@ -27,10 +27,10 @@ export function MainMenu({ mainMenu, themeSettings }) {
 							{contacts.map((single, index) => {
 								const { link, image, alt, text } = single;
 								return (
-									<li key={index} className="flex items-center">
+									<li key={`ct-i-${index}`} className="flex items-center">
 										<a href={link} className="flex flex-nowrap first-of-type:mr-6">
 											<img className="w-4 mr-2" src={image} alt={alt} />
-											<p>{text}</p>
+											<p className="text-sm">{text}</p>
 										</a>
 									</li>
 								);
@@ -39,10 +39,14 @@ export function MainMenu({ mainMenu, themeSettings }) {
 					</div>
 					<div className="grow flex justify-end items-center">
 						<ul className="flex">
-							{countryFlags.map((single) => {
+							{countryFlags.map((single, index) => {
 								let flag = new Map(single);
 								return (
-									<li onClick={() => handleLangChange(flag.get("slug"))} className="mr-4 last:mr-10">
+									<li
+										key={`fg-${index}`}
+										onClick={() => handleLangChange(flag.get("slug"))}
+										className="mr-4 last:mr-10"
+									>
 										{<img src={flag.get("flag")} className="cursor-pointer" />}
 									</li>
 								);
@@ -51,11 +55,18 @@ export function MainMenu({ mainMenu, themeSettings }) {
 					</div>
 					<div className="flex items-stretch">
 						<ul className="flex">
-							{socials.map((single) => {
+							{socials.map((single, index) => {
 								const { iconImage, alt, iconLink } = single;
 								return (
-									<li className="flex items-center mr-1.5 pr-1.5 first:border-l first:pl-1.5 border-r border-black py-3 opacity-70">
-										<a href={iconLink} target="_blank">
+									<li
+										key={`ss-${index}`}
+										className="flex items-center mr-1.5 pr-1.5 first:border-l first:pl-1.5 border-r border-gray-500 py-3"
+									>
+										<a
+											href={iconLink}
+											target="_blank"
+											className="opacity-70 hover:opacity-100 transition-opacity"
+										>
 											<img className="w-4" src={iconImage} alt={alt} />
 										</a>
 									</li>
