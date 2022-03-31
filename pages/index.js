@@ -5,7 +5,7 @@ import getMeta from "../lib/getMeta";
 import { GET_SINGLE_MENU } from "../lib/wordpress/menu";
 import { GET_PAGE_DATA } from "../lib/wordpress/page";
 import { GET_THEME_SETTINGS } from "../lib/wordpress/head";
-import { MainMenu } from "../components/wordpress/mainMenu";
+import { MainMenu } from "../components/wordpress/mainMenu/mainMenu";
 import { getPageSlug } from "../lib/getPageSlug";
 import { getMenu } from "../lib/getMenu";
 import { getThemeSetting } from "../lib/getThemeSetting";
@@ -33,7 +33,7 @@ export default function Home({ meta, page, menus, themeSettings }) {
 				<link rel="icon" type="image/x-icon" href={favicon}></link>
 			</Head>
 
-			<MainMenu mainMenu={mainMenu} />
+			<MainMenu mainMenu={mainMenu} themeSettings={themeSettings} />
 
 			<Container>
 				<h2 className="text-white">COŚ</h2>

@@ -7,6 +7,9 @@ module.exports = {
 			colors: {
 				primary: "#fa4f00",
 			},
+			fontFamily: {
+				sans: ["Open Sans", "sans-serif"],
+			},
 		},
 	},
 	plugins: [],
