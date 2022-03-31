@@ -54,9 +54,9 @@ export function MainMenu({ mainMenu, themeSettings }) {
 							{socials.map((single) => {
 								const { iconImage, alt, iconLink } = single;
 								return (
-									<li className="flex items-center mr-1.5 pr-1.5 first:border-l first:pl-1.5 border-r border-black py-3">
+									<li className="flex items-center mr-1.5 pr-1.5 first:border-l first:pl-1.5 border-r border-black py-3 opacity-70">
 										<a href={iconLink} target="_blank">
-											<img className="w-4 fill-red-700" src={iconImage} alt={alt} />
+											<img className="w-4" src={iconImage} alt={alt} />
 										</a>
 									</li>
 								);
