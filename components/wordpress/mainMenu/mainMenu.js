@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getThemeSetting } from "../../../lib/getThemeSetting";
 import { useRouter } from "next/router";
 import { ContainerFull } from "../../structure/ContainerFull";
 
-export function MainMenu({ mainMenu, themeSettings }) {
+export function MainMenu({ mainMenu, themeSettings, customClasses }) {
 	let { countryFlags, phone, email, facebook, instagram, linkedIn, twiiter } = getThemeSetting(
 		themeSettings,
 		"ThemeSettings_Top_Bar"
@@ -29,7 +30,7 @@ export function MainMenu({ mainMenu, themeSettings }) {
 								return (
 									<li key={`ct-i-${index}`} className="flex items-center">
 										<a href={link} className="flex flex-nowrap first-of-type:mr-6">
-											<img className="w-4 mr-2" src={image} alt={alt} />
+											<Image src={image} alt={alt} layout="raw" width="16" height="14" className="mr-2" />
 											<p className="text-sm">{text}</p>
 										</a>
 									</li>
@@ -76,7 +77,7 @@ export function MainMenu({ mainMenu, themeSettings }) {
 					</div>
 				</ContainerFull>
 			</header>
-			<nav>
+			<nav className={customClasses}>
 				<ul className={`${mainMenu.slug}`}>
 					{mainMenu.menuItems.nodes.map((menuItem) => {
 						const { id, cssClasses, label, path, title } = menuItem;

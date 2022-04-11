@@ -11,14 +11,23 @@ module.exports = withTranslateRoutes({
 		locales: ["en", "pl"],
 		defaultLocale: "pl",
 	},
+	images: {
+		domains: ["wordpress.local", "4adstudio.pl"],
+		dangerouslyAllowSVG: true,
+	},
+	experimental: {
+		images: {
+			layoutRaw: true,
+		},
+	},
 	async redirects() {
-    return [
-      {
-		// Redirect from /en/home-page to /en
-        source: '/home-page',
-        destination: '/',
-        permanent: true,
-      },
-    ]
-  },
+		return [
+			{
+				// Redirect from /en/home-page to /en
+				source: "/home-page",
+				destination: "/",
+				permanent: true,
+			},
+		];
+	},
 });

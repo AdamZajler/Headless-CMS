@@ -11,6 +11,7 @@ import { getMenu } from "../lib/getMenu";
 import { getThemeSetting } from "../lib/getThemeSetting";
 import { Container } from "../components/structure/container";
 import { ContainerFull } from "../components/structure/ContainerFull";
+import { HomePageSlider } from "../components/look/HomePageSlider";
 
 export default function Home({ meta, page, menus, themeSettings }) {
 	// data from themeSetting (customizer)
@@ -33,7 +34,13 @@ export default function Home({ meta, page, menus, themeSettings }) {
 				<link rel="icon" type="image/x-icon" href={favicon}></link>
 			</Head>
 
-			<MainMenu mainMenu={mainMenu} themeSettings={themeSettings} />
+			{/* <MainMenu
+				customClasses="absolute w-full z-10 bg-red-900 opacity-50"
+				mainMenu={mainMenu}
+				themeSettings={themeSettings}
+			/> */}
+
+			<HomePageSlider></HomePageSlider>
 
 			<Container>
 				<h2 className="text-white">COŚ</h2>
