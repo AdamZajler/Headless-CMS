@@ -39,7 +39,7 @@ export default function Home({ meta, page, menus, themeSettings }) {
 				<link rel="icon" type="image/png" sizes="48x48" href={themeMeta.favicon48x48}></link>
 				<link rel="icon" type="image/png" sizes="32x32" href={themeMeta.favicon32x32}></link>
 				<link rel="icon" type="image/png" sizes="16x16" href={themeMeta.favicon16x16}></link>
-				<link rel="manifest" href={themeMeta.webmanifest}></link>
+				<link rel="manifest" href="/site.webmanifest"></link>
 			</Head>
 
 			<MainMenu
