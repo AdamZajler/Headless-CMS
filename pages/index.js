@@ -15,7 +15,9 @@ import { HomePageSlider } from "../components/look/HomePageSlider";
 
 export default function Home({ meta, page, menus, themeSettings }) {
 	// data from themeSetting (customizer)
-	const favicon = getThemeSetting(themeSettings, "ThemeSettings_Favicon").link;
+	const themeMeta = getThemeSetting(themeSettings, "ThemeSettings_Meta");
+	console.log(themeMeta.windowsMetroColor);
+	console.log(themeMeta.safariThemeColor);
 
 	// Filter for primary menu
 	const mainMenu = menus.filter((single) => {
@@ -31,7 +33,13 @@ export default function Home({ meta, page, menus, themeSettings }) {
 		<div>
 			<Head>
 				{metaData}
-				<link rel="icon" type="image/x-icon" href={favicon}></link>
+				<meta name="msapplication-TileColor" content={themeMeta.windowsMetroColor}></meta>
+				<meta name="theme-color" content={themeMeta.safariThemeColor}></meta>
+				<link rel="apple-touch-icon" sizes="180x180" href={themeMeta.appleTouch}></link>
+				<link rel="icon" type="image/png" sizes="48x48" href={themeMeta.favicon48x48}></link>
+				<link rel="icon" type="image/png" sizes="32x32" href={themeMeta.favicon32x32}></link>
+				<link rel="icon" type="image/png" sizes="16x16" href={themeMeta.favicon16x16}></link>
+				<link rel="manifest" href={themeMeta.webmanifest}></link>
 			</Head>
 
 			<MainMenu
