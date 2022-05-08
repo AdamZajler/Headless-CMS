@@ -16,8 +16,6 @@ import { HomePageSlider } from "../components/look/HomePageSlider";
 export default function Home({ meta, page, menus, themeSettings }) {
 	// data from themeSetting (customizer)
 	const themeMeta = getThemeSetting(themeSettings, "ThemeSettings_Meta");
-	console.log(themeMeta.windowsMetroColor);
-	console.log(themeMeta.safariThemeColor);
 
 	// Filter for primary menu
 	const mainMenu = menus.filter((single) => {
@@ -28,6 +26,7 @@ export default function Home({ meta, page, menus, themeSettings }) {
 
 	// Parse string meta data to HTML
 	const metaData = parse(meta);
+	console.log(meta);
 
 	return (
 		<div>
