@@ -27,6 +27,7 @@ export function MainMenu({ mainMenu, themeSettings, customClasses }) {
 						<ul className="flex">
 							{contacts.map((single, index) => {
 								const { link, image, alt, text } = single;
+								if (!link) return null;
 								return (
 									<li key={`ct-i-${index}`} className="flex items-center">
 										<a href={link} className="flex flex-nowrap first-of-type:mr-6">
@@ -58,6 +59,7 @@ export function MainMenu({ mainMenu, themeSettings, customClasses }) {
 						<ul className="flex">
 							{socials.map((single, index) => {
 								const { iconImage, alt, iconLink } = single;
+								if (!iconLink) return null;
 								return (
 									<li
 										key={`ss-${index}`}

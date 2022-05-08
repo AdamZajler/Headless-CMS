@@ -1,4 +1,4 @@
-import Swiper, { Autoplay, Loop } from "swiper";
+import Swiper, { Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

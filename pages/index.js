@@ -34,11 +34,11 @@ export default function Home({ meta, page, menus, themeSettings }) {
 				<link rel="icon" type="image/x-icon" href={favicon}></link>
 			</Head>
 
-			{/* <MainMenu
+			<MainMenu
 				customClasses="absolute w-full z-10 bg-red-900 opacity-50"
 				mainMenu={mainMenu}
 				themeSettings={themeSettings}
-			/> */}
+			/>
 
 			<HomePageSlider></HomePageSlider>
 
