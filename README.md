@@ -21,3 +21,5 @@ First is to set-up Local&trade; by flywheel local wordpress envirotment, and the
   - create Wordpress username & password & email (those will be nessecary to login into wp-admin). I suggest to pass "admin", "123", "[your-common-used @ email.com]"
   
 4. After install, click "Go to site folder" under your installation title
+
+## more steps & gifs will be upload soon ;) 
